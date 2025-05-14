@@ -1,5 +1,4 @@
 import React from 'react'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ChevronDown } from 'lucide-react';
 import { SquareArrowOutUpRight } from 'lucide-react';
 
