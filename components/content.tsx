@@ -20,8 +20,8 @@ const Content = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
-  const [isOpen4, setIsOpen4] = useState(false);
+  // const [isOpen3, setIsOpen3] = useState(false);
+  // const [isOpen4, setIsOpen4] = useState(false);
 
 
   const fileInputRef = useRef<HTMLInputElement>(null);
