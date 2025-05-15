@@ -45,7 +45,7 @@ const Content = () => {
 
       {isOpen && (
 
-        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50" onClick={() => setIsOpen(false)}>
+        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50" >
           <div className="bg-white p-4 rounded shadow-lg">
             <h2 className="text-lg font-semibold">Insert Link</h2>
             <div>
