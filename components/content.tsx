@@ -20,8 +20,36 @@ const Content = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  // const [isOpen3, setIsOpen3] = useState(false);
-  // const [isOpen4, setIsOpen4] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [isWorkplaceModalOpen, setIsWorkplaceModalOpen] = useState(false);
+  const [workplace, setWorkplace] = useState("");
+  const [workplaceDate, setWorkplaceDate] = useState("");
+  const [savedWorkplace, setSavedWorkplace] = useState<{ name: string; date: string } | null>(null);
+  const [link, setSavedLink] = useState<string | null>(null);
+
+  const techOptions = [
+    "React",
+    "Next.js",
+    "Node.js",
+    "Python",
+    "Flask",
+    "Django",
+    "TypeScript",
+  ];
+
+  const handleSelectTech = (tech: string) => {
+    setSelectedTech(tech);
+    setIsDropdownOpen(false);
+  };
+
+  const handleSaveWorkplace = () => {
+    setSavedWorkplace({ name: workplace, date: workplaceDate });
+    setIsWorkplaceModalOpen(false);
+    setWorkplace("");
+    setWorkplaceDate("");
+  };
+
 
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -36,32 +64,51 @@ const Content = () => {
     if (files && files.length > 0) {
       const file = files[0];
       console.log('Selected file:', file);
-      // You can perform further actions with the selected file here
     }
   };
+
+  const handleinsertclick = () => {
+
+  }
     
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-4 pb-3 max-w-[80rem]">
-
       {isOpen && (
-
-        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50" >
-          <div className="bg-white p-4 rounded shadow-lg">
+        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50">
+          <div className=" relative bg-white p-4 rounded shadow-lg">
+            <span className = " absolute text-black top-3 right-2 cursor-pointer text-base hover:text-slate-300" onClick={() => setIsOpen(false)}>×</span>
             <h2 className="text-lg font-semibold">Insert Link</h2>
             <div>
               <p className="text-sm">Insert your link here</p>
-              <Input className="w-full mt-2" placeholder="https://example.com" />
+              <Input
+                className="w-full mt-2"
+                placeholder="https://example.com"
+              />
             </div>
-            <button onClick={() => setIsOpen(false)} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-400">Insert</button>
+            <button
+              onClick={handleinsertclick}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-400"
+            >
+              Insert
+            </button>
           </div>
         </div>
       )}
 
       {isOpen2 && (
-        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50" onClick={() => setIsOpen2(false)}>
+        <div
+          className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50"
+          onClick={() => setIsOpen2(false)}
+        >
           <div className="bg-white p-4 rounded shadow-lg">
             <h2 className="text-lg font-semibold">Upload Resume</h2>
-            <button type="button" onClick={handleButtonClick} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-400">Insert</button>
+            <button
+              type="button"
+              onClick={handleButtonClick}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-400"
+            >
+              Insert
+            </button>
             <input
               type="file"
               ref={fileInputRef}
@@ -71,11 +118,75 @@ const Content = () => {
           </div>
         </div>
       )}
+
+      {isDropdownOpen && (
+        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg min-w-[250px]">
+            <h2 className="text-lg font-semibold mb-4">Select Technology</h2>
+            <ul>
+              {techOptions.map((tech) => (
+                <li
+                  key={tech}
+                  className="py-2 px-4 hover:bg-blue-100 cursor-pointer rounded"
+                  onClick={() => handleSelectTech(tech)}
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+            <button
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400"
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isWorkplaceModalOpen && (
+        <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg min-w-[300px]">
+            <h2 className="text-lg font-semibold mb-4">Add Workplace</h2>
+            <div className="flex flex-col gap-4">
+              <input
+                className="border p-2 rounded"
+                placeholder="Workplace Name"
+                value={workplace}
+                onChange={(e) => setWorkplace(e.target.value)}
+              />
+              <input
+                className="border p-2 rounded"
+                placeholder="Date (e.g. 01/01/2024)"
+                value={workplaceDate}
+                onChange={(e) => setWorkplaceDate(e.target.value)}
+              />
+              <div className="flex gap-2 justify-end">
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400"
+                  onClick={handleSaveWorkplace}
+                >
+                  Save
+                </button>
+                <button
+                  className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+                  onClick={() => setIsWorkplaceModalOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="text-sm mt-3">
         <p className="font-semibold text-lg">Hero</p>
 
         <div className="max-w-md min-w-[24rem] h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">Section: Hero <span className = "text-gray-400">(Portfolio-Hero)</span></p>
+          <p className="p-3 bg-red-100 -mx-3 text-md">
+            Section: Hero{" "}
+            <span className="text-gray-400">(Portfolio-Hero)</span>
+          </p>
 
           <div className="flex items-center gap-2 mt-5">
             <ALargeSmall className="w-5" />
@@ -84,22 +195,38 @@ const Content = () => {
 
           <Input className="w-full" />
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <UserRound className="w-5" />
-                    <p>Social Media</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <UserRound className="w-5" />
+              <p>Social Media</p>
+            </div>
 
-                <span className = "flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer" onClick={()=>setIsOpen(true)}><p className = "text-sm font-semibold hover:font-normal">Insert Link</p> <Link2 className = "w-4"/></span>
+            <span
+              className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            >
+              <p className="text-sm font-semibold hover:font-normal">
+                Insert Link
+              </p>{" "}
+              <Link2 className="w-4" />
+            </span>
           </div>
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5" >
-                  <FileUp className="w-5" />
-                  <p>Resume</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <FileUp className="w-5" />
+              <p>Resume</p>
+            </div>
 
-                <span className = "flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer" onClick={()=>setIsOpen2(true)}><p className = "text-sm font-semibold hover:font-normal">Upload Resume</p> <CloudUpload className = "w-4"/></span>
+            <span
+              className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
+              onClick={() => setIsOpen2(true)}
+            >
+              <p className="text-sm font-semibold hover:font-normal">
+                Upload Resume
+              </p>{" "}
+              <CloudUpload className="w-4" />
+            </span>
           </div>
         </div>
       </div>
@@ -108,31 +235,42 @@ const Content = () => {
         <p className="font-semibold text-lg">About</p>
 
         <div className="max-w-md min-w-[24rem] h-fit pb-3 border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">Section: About <span className = "text-gray-400">(Portfolio-About)</span></p>
+          <p className="p-3 bg-red-100 -mx-3 text-md">
+            Section: About{" "}
+            <span className="text-gray-400">(Portfolio-About)</span>
+          </p>
 
           <div className="flex items-center gap-2 mt-5">
             <Type className="w-5" />
             <p>Paragraph 1</p>
           </div>
 
-          <Textarea/>
+          <Textarea />
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <SquareTerminal className="w-5" />
-                    <p>Technologies</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <SquareTerminal className="w-5" />
+              <p>Technologies</p>
+            </div>
 
-                <span className = "flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Select Technologies</p> <ChevronDown className = "w-4"/></span>
+            <span
+              className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
+              onClick={() => setIsDropdownOpen(true)}
+            >
+              <p className="text-sm font-semibold hover:font-normal">
+                {selectedTech ? selectedTech : "Select Technologies"}
+              </p>{" "}
+              <ChevronDown className="w-4" />
+            </span>
           </div>
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <Type className="w-5" />
-                    <p>Paragraph</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <Type className="w-5" />
+              <p>Paragraph</p>
+            </div>
 
-                <Textarea/>
+            <Textarea />
           </div>
         </div>
       </div>
@@ -141,46 +279,77 @@ const Content = () => {
         <p className="font-semibold text-lg">Experience</p>
 
         <div className="max-w-md min-w-[24rem] h-fit border border-gray-300 shadow-md px-3 pb-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">Section: Experience <span className = "text-gray-400">(Portfolio-Experience)</span></p>
+          <p className="p-3 bg-red-100 -mx-3 text-md">
+            Section: Experience{" "}
+            <span className="text-gray-400">(Portfolio-Experience)</span>
+          </p>
 
           <div className="flex items-center gap-2 mt-5 mb-3">
             <Building2 className="w-5" />
             <p>Companies</p>
           </div>
 
-          <span className = "flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Previous Workplace</p> <Plus className = "w-4"/></span>
+          <span
+            className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
+            onClick={() => setIsWorkplaceModalOpen(true)}
+          >
+            <p className="text-sm font-semibold hover:font-normal">
+              {savedWorkplace ? savedWorkplace.name : "Previous Workplace"}
+            </p>
+            <Plus className="w-4" />
+          </span>
 
-          <div className = "flex flex-col gap-3">
-                <div className="flex items-center gap-2 mt-5">
-                    <BriefcaseBusiness className="w-5" />
-                    <p>Role</p>
-                </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2 mt-5">
+              <BriefcaseBusiness className="w-5" />
+              <p>Role</p>
+            </div>
 
-                <span className = "flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Role</p> <ChevronDown className = "w-4"/></span>
+            <span className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer">
+              <p className="text-sm font-semibold hover:font-normal">Role</p>{" "}
+              <ChevronDown className="w-4" />
+            </span>
           </div>
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <CalendarDays className="w-5" />
-                    <p>Duration</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <CalendarDays className="w-5" />
+              <p>Duration</p>
+            </div>
 
-                <div className = "flex gap-2">
-                    <span className = "flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Workplace</p> <p className = "text-sm font-semibold hover:font-normal border-l-2 px-2">dd/mm/yy</p><ChevronDown className = "w-4"/></span>
+            <div className="flex gap-2">
+              <span
+                className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"
+                onClick={() => setIsWorkplaceModalOpen(true)}
+              >
+                <p className="text-sm font-semibold hover:font-normal">
+                  {savedWorkplace ? savedWorkplace.name : "Workplace"}
+                </p>
+                <p className="text-sm font-semibold hover:font-normal border-l-2 px-2">
+                  {savedWorkplace ? savedWorkplace.date : "dd/mm/yy"}
+                </p>
+                <ChevronDown className="w-4" />
+              </span>
 
-                    <span className = "border-1 p-1 border-black rounded-sm"><Plus className = "w-5"/></span>
-                </div>   
+              <span className="border-1 p-1 border-black rounded-sm">
+                <Plus className="w-5" />
+              </span>
+            </div>
           </div>
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <TableOfContents className="w-5" />
-                    <p>Impact</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <TableOfContents className="w-5" />
+              <p>Impact</p>
+            </div>
 
-                <span className = "flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Achievements</p><Plus className = "w-4"/></span>                  
+            <span className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer">
+              <p className="text-sm font-semibold hover:font-normal">
+                Achievements
+              </p>
+              <Plus className="w-4" />
+            </span>
           </div>
-
         </div>
       </div>
 
@@ -188,22 +357,28 @@ const Content = () => {
         <p className="font-semibold text-lg">Services</p>
 
         <div className="max-w-md min-w-[24rem] h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">Section: Services <span className = "text-gray-400">(Portfolio-Services)</span></p>
+          <p className="p-3 bg-red-100 -mx-3 text-md">
+            Section: Services{" "}
+            <span className="text-gray-400">(Portfolio-Services)</span>
+          </p>
 
           <div className="flex items-center gap-2 mt-5 mb-3">
             <BriefcaseBusinessIcon className="w-5" />
             <p>Services</p>
           </div>
 
-          <span className = "flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"><p className = "text-sm font-semibold hover:font-normal">Services</p><Plus className = "w-4"/></span>                  
+          <span className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer">
+            <p className="text-sm font-semibold hover:font-normal">Services</p>
+            <Plus className="w-4" />
+          </span>
 
-          <div className = "flex flex-col gap-2">
-                <div className="flex items-center gap-2 mt-5">
-                    <FileText className="w-5" />
-                    <p>Descriptions</p>
-                </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 mt-5">
+              <FileText className="w-5" />
+              <p>Descriptions</p>
+            </div>
 
-                <Textarea placeholder="Describe yourself"/>
+            <Textarea placeholder="Describe yourself" />
           </div>
         </div>
       </div>

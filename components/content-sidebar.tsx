@@ -11,11 +11,10 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex flex-col max-w-[20rem] min-h-sm max-h-md border-r border-gray-300 px-4 pt-4">
       <div>
-            <p className="text-gray-400">Hero</p>
 
             <Accordion type="single" collapsible className = "w-fit">
-                <AccordionItem value="item-1" className="px-3">
-                    <AccordionTrigger>Portfolio-Hero</AccordionTrigger>
+                <AccordionItem value="item-1" className="">
+                    <AccordionTrigger>Hero</AccordionTrigger>
                     <AccordionContent >
                     <p>Role</p>
                     </AccordionContent>
@@ -32,11 +31,9 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className="text-gray-400">About</p>
-
             <Accordion type="single" collapsible className = "w-fit">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-About</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>About</AccordionTrigger>
                 <AccordionContent>
                 <p>Paragraph 1</p>
                 </AccordionContent>
@@ -53,11 +50,9 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className = "text-gray-400">Experience</p>
-
             <Accordion type="single" collapsible className = "w-fit hover:no-underline">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-Experience</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Experience</AccordionTrigger>
                 <AccordionContent>
                 <p>Companies</p>
                 </AccordionContent>
@@ -78,11 +73,9 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className = "text-gray-400">Services</p>
-
             <Accordion type="single" collapsible className = "w-fit">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-Services</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Services</AccordionTrigger>
                 <AccordionContent>
                 <p>Service</p>
                 </AccordionContent>
@@ -96,11 +89,9 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className = "text-gray-400">Projects</p>
-
             <Accordion type="single" collapsible className = "w-fit">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-Projects</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Projects</AccordionTrigger>
                 <AccordionContent>
                 <p>Project Name</p>
                 </AccordionContent>
@@ -121,11 +112,9 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className = "text-gray-400">Testimonials</p>
-
             <Accordion type="single" collapsible className = "w-fit">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-Testimonials</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Testimonials</AccordionTrigger>
                 <AccordionContent>
                 <p>Name</p>
                 </AccordionContent>
@@ -146,11 +135,28 @@ const Sidebar = () => {
       </div>
 
       <div>
-            <p className = "text-gray-400">Contact</p>
-
             <Accordion type="single" collapsible className = "w-fit">
-            <AccordionItem value="item-1" className = "px-3">
-                <AccordionTrigger>Portfolio-Contact</AccordionTrigger>
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Contact</AccordionTrigger>
+                <AccordionContent>
+                <p>Phone Number</p>
+                </AccordionContent>
+
+                <AccordionContent>
+                <p>Email</p>
+                </AccordionContent>
+
+                <AccordionContent>
+                <p>Address</p>
+                </AccordionContent>
+            </AccordionItem>
+            </Accordion>
+      </div>
+
+      <div>
+            <Accordion type="single" collapsible className = "w-fit">
+            <AccordionItem value="item-1" className = "">
+                <AccordionTrigger>Image</AccordionTrigger>
                 <AccordionContent>
                 <p>Phone Number</p>
                 </AccordionContent>
