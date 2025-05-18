@@ -1,6 +1,7 @@
 "use client"
 import React, {useRef} from 'react'
 import { useState } from 'react';
+import { useSection } from '@/context/SectionContext';
 
 import {Input} from "@/components/ui/input"
 import { ALargeSmall, BriefcaseBusiness, BriefcaseBusinessIcon, CalendarDays, FileText, TableOfContents } from 'lucide-react';
@@ -16,6 +17,7 @@ import { Building2 } from 'lucide-react';
 import { Plus } from 'lucide-react';
 
 const Content = () => {
+  const { section } = useSection();
 
   
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +28,7 @@ const Content = () => {
   const [workplace, setWorkplace] = useState("");
   const [workplaceDate, setWorkplaceDate] = useState("");
   const [savedWorkplace, setSavedWorkplace] = useState<{ name: string; date: string } | null>(null);
-  const [link, setSavedLink] = useState<string | null>(null);
+  //const [link, setSavedLink] = useState<string | null>(null);
 
   const techOptions = [
     "React",
@@ -72,7 +74,7 @@ const Content = () => {
   }
     
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-4 pb-3 max-w-[80rem]">
+    <div className="gap-12 px-4 pb-3 w-[60rem]">
       {isOpen && (
         <div className="fixed inset-0 bg-slate-500/50 flex items-center justify-center z-50">
           <div className=" relative bg-white p-4 rounded shadow-lg">
@@ -179,10 +181,12 @@ const Content = () => {
           </div>
         </div>
       )}
-      <div className="text-sm mt-3">
+
+      {section === "Hero" && (
+        <div className="text-sm mt-3 w-full">
         <p className="font-semibold text-lg">Hero</p>
 
-        <div className="max-w-md min-w-[24rem] h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+        <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
           <p className="p-3 bg-red-100 -mx-3 text-md">
             Section: Hero{" "}
             <span className="text-gray-400">(Portfolio-Hero)</span>
@@ -230,11 +234,13 @@ const Content = () => {
           </div>
         </div>
       </div>
+      )}
 
-      <div className=" text-sm mt-3">
+      {section === "About" && (
+        <div className=" text-sm mt-3 w-full">
         <p className="font-semibold text-lg">About</p>
 
-        <div className="max-w-md min-w-[24rem] h-fit pb-3 border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+        <div className="w-full h-fit pb-3 border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
           <p className="p-3 bg-red-100 -mx-3 text-md">
             Section: About{" "}
             <span className="text-gray-400">(Portfolio-About)</span>
@@ -275,113 +281,253 @@ const Content = () => {
         </div>
       </div>
 
-      <div className=" text-sm mt-3">
-        <p className="font-semibold text-lg">Experience</p>
+      )}
 
-        <div className="max-w-md min-w-[24rem] h-fit border border-gray-300 shadow-md px-3 pb-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">
-            Section: Experience{" "}
-            <span className="text-gray-400">(Portfolio-Experience)</span>
-          </p>
+      {section === "Experience" && (
+          <div className=" text-sm mt-3 w-full">
+            <p className="font-semibold text-lg">Experience</p>
 
-          <div className="flex items-center gap-2 mt-5 mb-3">
-            <Building2 className="w-5" />
-            <p>Companies</p>
-          </div>
+            <div className="w-full h-fit border border-gray-300 shadow-md px-3 pb-3 gap-2 rounded-lg">
+              <p className="p-3 bg-red-100 -mx-3 text-md">
+                Section: Experience{" "}
+                <span className="text-gray-400">(Portfolio-Experience)</span>
+              </p>
 
-          <span
-            className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
-            onClick={() => setIsWorkplaceModalOpen(true)}
-          >
-            <p className="text-sm font-semibold hover:font-normal">
-              {savedWorkplace ? savedWorkplace.name : "Previous Workplace"}
-            </p>
-            <Plus className="w-4" />
-          </span>
+              <div className="flex items-center gap-2 mt-5 mb-3">
+                <Building2 className="w-5" />
+                <p>Companies</p>
+              </div>
 
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 mt-5">
-              <BriefcaseBusiness className="w-5" />
-              <p>Role</p>
-            </div>
-
-            <span className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer">
-              <p className="text-sm font-semibold hover:font-normal">Role</p>{" "}
-              <ChevronDown className="w-4" />
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 mt-5">
-              <CalendarDays className="w-5" />
-              <p>Duration</p>
-            </div>
-
-            <div className="flex gap-2">
               <span
-                className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"
+                className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer"
                 onClick={() => setIsWorkplaceModalOpen(true)}
               >
                 <p className="text-sm font-semibold hover:font-normal">
-                  {savedWorkplace ? savedWorkplace.name : "Workplace"}
+                  {savedWorkplace ? savedWorkplace.name : "Previous Workplace"}
                 </p>
-                <p className="text-sm font-semibold hover:font-normal border-l-2 px-2">
-                  {savedWorkplace ? savedWorkplace.date : "dd/mm/yy"}
-                </p>
-                <ChevronDown className="w-4" />
+                <Plus className="w-4" />
               </span>
 
-              <span className="border-1 p-1 border-black rounded-sm">
-                <Plus className="w-5" />
-              </span>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 mt-5">
+                  <BriefcaseBusiness className="w-5" />
+                  <p>Role</p>
+                </div>
+
+                <span className="flex gap-3 border-2 w-fit items-center px-3 rounded-sm cursor-pointer">
+                  <p className="text-sm font-semibold hover:font-normal">Role</p>{" "}
+                  <ChevronDown className="w-4" />
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 mt-5">
+                  <CalendarDays className="w-5" />
+                  <p>Duration</p>
+                </div>
+
+                <div className="flex gap-2">
+                  <span
+                    className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer"
+                    onClick={() => setIsWorkplaceModalOpen(true)}
+                  >
+                    <p className="text-sm font-semibold hover:font-normal">
+                      {savedWorkplace ? savedWorkplace.name : "Workplace"}
+                    </p>
+                    <p className="text-sm font-semibold hover:font-normal border-l-2 px-2">
+                      {savedWorkplace ? savedWorkplace.date : "dd/mm/yy"}
+                    </p>
+                    <ChevronDown className="w-4" />
+                  </span>
+
+                  <span className="border-1 p-1 border-black rounded-sm">
+                    <Plus className="w-5" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 mt-5">
+                  <TableOfContents className="w-5" />
+                  <p>Impact</p>
+                </div>
+
+                <span className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer">
+                  <p className="text-sm font-semibold hover:font-normal">
+                    Achievements
+                  </p>
+                  <Plus className="w-4" />
+                </span>
+              </div>
             </div>
           </div>
+      )}
 
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 mt-5">
-              <TableOfContents className="w-5" />
-              <p>Impact</p>
+      {section === "Services" && (
+
+        <div className=" text-sm mt-3 w-full">
+          <p className="font-semibold text-lg">Services</p>
+
+          <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+            <p className="p-3 bg-red-100 -mx-3 text-md">
+              Section: Services{" "}
+              <span className="text-gray-400">(Portfolio-Services)</span>
+            </p>
+
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <BriefcaseBusinessIcon className="w-5" />
+              <p>Services</p>
             </div>
 
             <span className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer">
-              <p className="text-sm font-semibold hover:font-normal">
-                Achievements
-              </p>
+              <p className="text-sm font-semibold hover:font-normal">Services</p>
               <Plus className="w-4" />
             </span>
-          </div>
-        </div>
-      </div>
 
-      <div className=" text-sm mt-3">
-        <p className="font-semibold text-lg">Services</p>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 mt-5">
+                <FileText className="w-5" />
+                <p>Descriptions</p>
+              </div>
 
-        <div className="max-w-md min-w-[24rem] h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
-          <p className="p-3 bg-red-100 -mx-3 text-md">
-            Section: Services{" "}
-            <span className="text-gray-400">(Portfolio-Services)</span>
-          </p>
-
-          <div className="flex items-center gap-2 mt-5 mb-3">
-            <BriefcaseBusinessIcon className="w-5" />
-            <p>Services</p>
-          </div>
-
-          <span className="flex gap-3 border-1 border-black w-fit items-center px-3 rounded-sm cursor-pointer">
-            <p className="text-sm font-semibold hover:font-normal">Services</p>
-            <Plus className="w-4" />
-          </span>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 mt-5">
-              <FileText className="w-5" />
-              <p>Descriptions</p>
+              <Textarea placeholder="Describe yourself" />
             </div>
-
-            <Textarea placeholder="Describe yourself" />
           </div>
         </div>
-      </div>
+      )}
+
+      {section === "Contact" && (
+        <div className="text-sm mt-3 w-full">
+          <p className="font-semibold text-lg">Contact</p>
+
+          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+            <p className="p-3 bg-red-100 -mx-3 text-md">
+              Section: Contact{" "}
+              <span className="text-gray-400">(Portfolio-Contact)</span>
+            </p>
+
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Phone Number</p>
+            </div>
+            <Input className="w-full" placeholder="Enter your phone number" />
+
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Email</p>
+            </div>
+            <Input className="w-full" placeholder="Enter your email address" />
+
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Address</p>
+            </div>
+            <Textarea className="w-full" placeholder="Enter your address" />
+          </div>
+        </div>
+      )}
+
+      {section === "Projects" && (
+        <div className="text-sm mt-3 w-full">
+          <p className="font-semibold text-lg">Projects</p>
+          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+            <p className="p-3 bg-red-100 -mx-3 text-md">
+              Section: Projects{" "}
+              <span className="text-gray-400">(Portfolio-Projects)</span>
+            </p>
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Project Name</p>
+            </div>
+            <Input className="w-full" placeholder="Enter your project name" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Description</p>
+            </div>
+            <Textarea className="w-full" placeholder="Describe your project" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Technologies</p>
+            </div>
+            <Input className="w-full" placeholder="Technologies used" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>References</p>
+            </div>
+            <Input className="w-full" placeholder="Project references or links" />
+          </div>
+        </div>
+      )}
+      
+      {section === "Testimonials" && (
+        <div className="text-sm mt-3 w-full">
+          <p className="font-semibold text-lg">Testimonials</p>
+          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+            <p className="p-3 bg-red-100 -mx-3 text-md">
+              Section: Testimonials{" "}
+              <span className="text-gray-400">(Portfolio-Testimonials)</span>
+            </p>
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Name</p>
+            </div>
+            <Input className="w-full" placeholder="Enter name" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Testimonial</p>
+            </div>
+            <Textarea className="w-full" placeholder="Enter testimonial" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Image</p>
+            </div>
+            <Input className="w-full" placeholder="Image URL or upload" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Organization</p>
+            </div>
+            <Input className="w-full" placeholder="Organization" />
+          </div>
+        </div>
+      )}
+      
+      {section === "Image" && (
+        <div className="text-sm mt-3 w-full">
+          <p className="font-semibold text-lg">Image</p>
+          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+            <p className="p-3 bg-red-100 -mx-3 text-md">
+              Section: Image{" "}
+              <span className="text-gray-400">(Portfolio-Image)</span>
+            </p>
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Phone Number</p>
+            </div>
+            <Input className="w-full" placeholder="Enter your phone number" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Email</p>
+            </div>
+            <Input className="w-full" placeholder="Enter your email address" />
+      
+            <div className="flex items-center gap-2 mt-5 mb-3">
+              <FileText className="w-5" />
+              <p>Address</p>
+            </div>
+            <Textarea className="w-full" placeholder="Enter your address" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

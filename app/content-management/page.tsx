@@ -3,6 +3,7 @@ import Sidebar from "@/components/content-sidebar";
 import Head from "next/head"; // Import Head for setting the page title
 import React from "react";
 import Info from "@/components/info"; // Import Info component if needed
+import { SectionProvider } from "@/context/SectionContext";
 
 const page = () => {
   return (
@@ -21,9 +22,11 @@ const page = () => {
           <span className="w-8 h-8 border border-black rounded-full bg-gray-300"></span>
         </div>
         <div className="flex">
-          <Sidebar />
-          <Content />
-          <Info/>
+          <SectionProvider>
+            <Sidebar />
+            <Content />
+            <Info />
+          </SectionProvider>
         </div>
       </div>
     </>
