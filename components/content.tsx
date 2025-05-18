@@ -186,7 +186,7 @@ const Content = () => {
         <div className="text-sm mt-3 w-full">
         <p className="font-semibold text-lg">Hero</p>
 
-        <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+        <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
           <p className="p-3 bg-red-100 -mx-3 text-md">
             Section: Hero{" "}
             <span className="text-gray-400">(Portfolio-Hero)</span>
@@ -240,7 +240,7 @@ const Content = () => {
         <div className=" text-sm mt-3 w-full">
         <p className="font-semibold text-lg">About</p>
 
-        <div className="w-full h-fit pb-3 border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+        <div className="w-full h-[20rem] pb-3 border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
           <p className="p-3 bg-red-100 -mx-3 text-md">
             Section: About{" "}
             <span className="text-gray-400">(Portfolio-About)</span>
@@ -287,7 +287,7 @@ const Content = () => {
           <div className=" text-sm mt-3 w-full">
             <p className="font-semibold text-lg">Experience</p>
 
-            <div className="w-full h-fit border border-gray-300 shadow-md px-3 pb-3 gap-2 rounded-lg">
+            <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 pb-3 gap-2 rounded-lg">
               <p className="p-3 bg-red-100 -mx-3 text-md">
                 Section: Experience{" "}
                 <span className="text-gray-400">(Portfolio-Experience)</span>
@@ -400,7 +400,7 @@ const Content = () => {
         <div className="text-sm mt-3 w-full">
           <p className="font-semibold text-lg">Contact</p>
 
-          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+          <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
             <p className="p-3 bg-red-100 -mx-3 text-md">
               Section: Contact{" "}
               <span className="text-gray-400">(Portfolio-Contact)</span>
@@ -430,7 +430,7 @@ const Content = () => {
       {section === "Projects" && (
         <div className="text-sm mt-3 w-full">
           <p className="font-semibold text-lg">Projects</p>
-          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+          <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
             <p className="p-3 bg-red-100 -mx-3 text-md">
               Section: Projects{" "}
               <span className="text-gray-400">(Portfolio-Projects)</span>
@@ -466,7 +466,7 @@ const Content = () => {
       {section === "Testimonials" && (
         <div className="text-sm mt-3 w-full">
           <p className="font-semibold text-lg">Testimonials</p>
-          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+          <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
             <p className="p-3 bg-red-100 -mx-3 text-md">
               Section: Testimonials{" "}
               <span className="text-gray-400">(Portfolio-Testimonials)</span>
@@ -502,7 +502,7 @@ const Content = () => {
       {section === "Image" && (
         <div className="text-sm mt-3 w-full">
           <p className="font-semibold text-lg">Image</p>
-          <div className="w-full h-fit border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
+          <div className="w-full h-[20rem] border border-gray-300 shadow-md px-3 gap-2 rounded-lg">
             <p className="p-3 bg-red-100 -mx-3 text-md">
               Section: Image{" "}
               <span className="text-gray-400">(Portfolio-Image)</span>
