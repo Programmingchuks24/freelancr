@@ -10,8 +10,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -20,7 +21,7 @@ export function LoginForm({
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -42,8 +43,8 @@ export function LoginForm({
 
       if (res.ok) {
         setSuccess("Login successful!");
-        // Redirect to content management after successful login
-        router.push("/content-management");
+        // Redirect to user-specific edit page
+        window.location.href = `https://showyy.onrender.com/cms/${form.username}/edit`;
       } else {
         const data = await res.json();
         console.log(data); // See the real error from backend
@@ -110,9 +111,9 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="\signup" className="underline underline-offset-4">
+              <Link href="/signup" className="underline underline-offset-4">
                 Sign up
-              </a>
+              </Link>
             </div>
           </form>
         </CardContent>
